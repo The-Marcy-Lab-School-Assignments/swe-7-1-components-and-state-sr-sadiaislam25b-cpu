@@ -19,6 +19,8 @@ const Greeting = () => {
   const name = "Sadia";
   return <h1>Hello, {name}!</h1>;
 };
+```
+
 ## Question 2 — The Build Step and Vite
 
 A browser cannot run a `.jsx` file directly. Why not? Explain the role of a build step and what it means to "compile" code in simple terms.
@@ -36,7 +38,7 @@ What does `useState` return, and what are the two things you get back from it? D
 
 **Your answer:**
 
----
+useState returns an array with two things: the current state value and a function  to update that value. For example, const [count, setCount] = useState(0) gives you count to display data in the component and setCount to change the data. When the state is updated using the update function, React automatically re-renders the component with the new value.
 
 ## Question 4 — Lifting State Up
 
@@ -75,6 +77,8 @@ const ShoppingList = () => {
 **Your answer:**
 
 ---
+The bug is that the original code directly mutates the existing array with `items.push('cherries')` and then passes the same array reference to `setItems`. React detects state changes by comparing the old and new reference — since the array is the same object in memory, React sees no change and skips the re-render. To trigger a re-render, you must pass a new array to `setItems`. The fix is to use the spread operator to create a brand-new array that includes the existing items plus the new one.
+
 ```jsx
 const ShoppingList = () => {
   const [items, setItems] = useState(['apples', 'bananas']);
